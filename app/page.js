@@ -1,5 +1,5 @@
 'use client'
-import { Box, Stack, TextField, Button} from "@mui/material";
+import { Box, Stack, TextField, Button, Typography } from "@mui/material";
 import { useState } from 'react';
 
 export default function Home() {
@@ -54,13 +54,22 @@ export default function Home() {
   }
 
   return (
-    <Box width='100vw' height='100vh' display='flex' flexDirection='column' alignItems='center' justifyContent='center'>
-      <Stack direction='column' width='600px' height='700px' border='1px solid black' p={2} spacing={3}>
+    <Box width='100vw' height='100vh' display='flex' flexDirection='column' alignItems='center' justifyContent='center' bgcolor='#FA4616'>
+      <Typography variant="h4" color="white" mb={2}>
+        University of Florida Chat Support
+      </Typography>
+      <Stack direction='column' width='600px' height='700px' border='1px solid #0021A5' borderRadius={4} bgcolor='white' p={2} spacing={3} boxShadow={3}>
         <Stack direction='column' spacing={2} flexGrow={2} overflow="auto" maxHeight="100%">
           {
             messages.map((message, index) => (
               <Box key={index} display='flex' justifyContent={message.role === 'assistant' ? "flex-start" : 'flex-end'}>
-                <Box bgcolor={message.role === 'assistant' ? "primary.main" : 'secondary.main'} color='white' borderRadius={16} p={3}>
+                <Box 
+                  bgcolor={message.role === 'assistant' ? "#0021A5" : '#FA4616'} 
+                  color='white' 
+                  borderRadius={16} 
+                  p={3}
+                  maxWidth='70%'
+                >
                   {message.content}
                 </Box>
               </Box>
@@ -68,10 +77,22 @@ export default function Home() {
           }
         </Stack>
         <Stack direction='row' spacing={2}>
-          <TextField label="Message" fullWidth value={message} onChange={(e) => setMessage(e.target.value)}></TextField>
-          <Button variant="contained" onClick={sendMessage}>Send</Button>
+          <TextField 
+            label="Message" 
+            fullWidth 
+            value={message} 
+            onChange={(e) => setMessage(e.target.value)} 
+            variant="outlined"
+            InputProps={{ style: { color: '#0021A5' } }}
+          />
+          <Button 
+            variant="contained" 
+            onClick={sendMessage} 
+            sx={{ bgcolor: '#FA4616', '&:hover': { bgcolor: '#D84513' } }}
+          >
+            Send
+          </Button>
         </Stack>
-
       </Stack>
     </Box>
   );
